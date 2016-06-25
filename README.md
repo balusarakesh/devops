@@ -28,11 +28,11 @@ Second Part:
  -  bootstrap the opscenter instance to the chef-server
  -  create three recipes "createcluster", "installopsc" and "installpiprequests" using the code provided
  -  add these recipes in the order of "installopsc", "installpiprequests" and "createcluster" to the opsscenter node
-  installopsc:
+     installopsc:
    - 	 this recipe is to install the opscenter
-  installpiprequests:
+     installpiprequests:
    - 	 this recipe is to install the python-pip and the python requests packages
-  createcluster:
+     createcluster:
    - 	 using the "provision.erb" and "run.erb" templates this recipe can create cassandra cluster
    - 	 make sure to put the proper ipaddresses in those templates
  -  run chef-client to finish the task
