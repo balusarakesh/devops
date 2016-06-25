@@ -1,0 +1,3 @@
+ - Create a 3 node cassandra cluster including opscenter and add dummy data more then a 2GB, you can download any data from the internet.
+ - Take a snapshot of the data using opscenter and try to import the snapshot into a single node cluster.
+ - Once successful automate the entire process of setting up the cluster with cloudformation and chef recipes and add a README with clear instructions.
