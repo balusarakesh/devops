@@ -1,0 +1,14 @@
+import requests
+import json
+
+def session_token():
+    result = requests.post('http://52.52.9.233:8888/login', data='{"username":"admin","password":"admin"}').content
+    json_data = json.loads(result)
+    return json_data['sessionid']
+
+def create_cluster(url):
+    result = requests.post(url, open('/root/provision.json', 'rb').read(), headers={'opscenter-session':session_token()}).content
+    return result
+
+print create_cluster('http://52.52.9.233:8888/provision')
+

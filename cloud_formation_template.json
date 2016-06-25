@@ -1,0 +1,56 @@
+{
+  "AWSTemplateFormatVersion" : "2010-09-09",
+
+ "Parameters":{
+	"KeyName":{
+	"Type": "AWS::EC2::KeyPair::KeyName"
+	},
+	"InstanceType":{
+	"Type" : "String"
+	},
+	"PrivateIpAddress":{
+	"Type":"String"
+	}
+},
+
+"Resources":{
+"EC2Instance":{
+	"Type" : "AWS::EC2::Instance",
+	"Properties":{
+		"InstanceType":{"Ref":"InstanceType"},
+		"PrivateIpAddress":{"Ref":"PrivateIpAddress"},
+		"AvailabilityZone" : "us-west-1a",
+		"SecurityGroups":[{"Ref":"InstanceSecurityGroup"}],
+		"KeyName":{"Ref":"KeyName"},
+		"ImageId":"ami-544e6e11"
+		}
+	},
+
+"InstanceSecurityGroup":{
+	"Type" : "AWS::EC2::SecurityGroup",
+	"Properties" : {
+	"GroupDescription":"ClusterSecurityGroup",
+	"SecurityGroupIngress":[{
+	"IpProtocol" : "tcp",
+	"FromPort": "0",
+	"ToPort": "65535",
+	"CidrIp":"0.0.0.0/0"},
+	{
+	"IpProtocol" : "udp",
+	"FromPort": "0",
+	"ToPort": "65535",
+	"CidrIp":"0.0.0.0/0"}]
+	
+}
+
+
+}},
+
+  "Outputs" : {
+    "InstanceId" : {
+      "Description" : "InstanceId of the newly created EC2 instance",
+      "Value" : { "Ref" : "EC2Instance" }
+}
+}
+}
+
