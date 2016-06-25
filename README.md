@@ -21,3 +21,18 @@ Restoring from into a single node cluster:
 	 - goto the backup service and restore the backup table from the previously created backups stored in the S3 bucket
 
 Second Part:
+	Creating EC2 Instances:
+	 - Create an instance which can be used as the opscenter
+	 - Launch three instances which act as nodes using the "cloud_formation_template.json" provided
+	Creating Cluster:
+	 - bootstrap the opscenter instance to the chef-server
+	 - create three recipes "createcluster", "installopsc" and "installpiprequests" using the code provided
+	 - add these recipes in the order of "installopsc", "installpiprequests" and "createcluster" to the opsscenter node
+		installopsc:
+		 - this recipe is to install the opscenter
+		installpiprequests:
+		 - this recipe is to install the python-pip and the python requests packages
+		createcluster:
+		 - using the "provision.erb" and "run.erb" templates this recipe can create cassandra cluster
+		 - make sure to put the proper ipaddresses in those templates
+	 - run chef-client to finish the task
