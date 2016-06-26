@@ -24,10 +24,15 @@ execute "sudo apt-get update" do
 	action :run
 end
 
-template "/etc/opscenter/opscenterd.conf" do
-	source "opscenterd.conf.erb"
+directory '/etc/opscenter' do
+	 action :create
 end
+
 
 package "opscenter" do
 	action :install
+end
+
+service "opscenterd" do
+	action :restart
 end
